@@ -35,27 +35,6 @@ function renederSingleMovie(moviename,movies){
     document.getElementById('tickets').textContent=movie.capacity-movie.tickets_sold
 
 }
-buyTicket.addEventListener('click', event => {
-    const filmEndpoint = `${filmsEndpoint}/${selectedFilmId}`;
-    get(filmEndpoint).then(film => {
-      if (film.tickets_sold < film.capacity) {
-        const data = {
-          tickets_sold: film.tickets_sold + 1
-        };
-        fetch(filmEndpoint, {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data)
-        }).then(() => {
-          updateFilmDetails({...film, tickets_sold: data.tickets_sold});
-        });
-      } else {
-        alert('Sorry, this showing is sold out.');
-      }
-    });
-  });
 
 
 
